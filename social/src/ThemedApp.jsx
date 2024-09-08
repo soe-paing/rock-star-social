@@ -1,18 +1,18 @@
 import { useState, createContext, useContext, useMemo } from "react";
-import Header from './components/Header';
 
 import {
+    Container,
 	CssBaseline,
 	ThemeProvider,
 	createTheme,
-	Container
 } from "@mui/material";
 
+import { Outlet } from "react-router-dom";
+
 import AppDrawer from "./components/AppDrawer";
+import Header from "./components/Header";
 
 import { grey, teal } from "@mui/material/colors";
-
-import { Outlet } from "react-router-dom";
 
 const AppContext = createContext();
 
@@ -49,10 +49,12 @@ export default function ThemedApp() {
 					mode,
 					setMode,
 				}}>
-				<Header/>
+				<Header />
+
 				<Container maxWidth="sm" sx={{ mt: 4 }}>
 					<Outlet />
 				</Container>
+
 				<AppDrawer />
 				<CssBaseline />
 			</AppContext.Provider>

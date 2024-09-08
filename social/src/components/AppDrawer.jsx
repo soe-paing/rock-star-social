@@ -19,15 +19,13 @@ import {
 	Login as LoginIcon,
 } from "@mui/icons-material";
 
-import { useNavigate } from 'react-router-dom';
-
 import { teal } from "@mui/material/colors";
-
+import { useNavigate } from "react-router-dom";
 import { useApp } from "../ThemedApp";
 
 export default function AppDrawer() {
 	const { showDrawer, setShowDrawer } = useApp();
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
 	return (
 		<div>
@@ -67,7 +65,7 @@ export default function AppDrawer() {
 				</Box>
 				<List>
 					<ListItem>
-						<ListItemButton onClick={() => navigate('/')}>
+						<ListItemButton onClick={() => navigate("/")}>
 							<ListItemIcon>
 								<HomeIcon />
 							</ListItemIcon>
@@ -77,7 +75,7 @@ export default function AppDrawer() {
 					<Divider />
 
 					<ListItem>
-						<ListItemButton onClick={() => navigate('/register')}>
+						<ListItemButton onClick={() => navigate("/register")}>
 							<ListItemIcon>
 								<RegisterIcon />
 							</ListItemIcon>
@@ -85,7 +83,7 @@ export default function AppDrawer() {
 						</ListItemButton>
 					</ListItem>
 					<ListItem>
-						<ListItemButton onClick={() => navigate('/login')}>
+						<ListItemButton onClick={() => navigate("/login")}>
 							<ListItemIcon>
 								<LoginIcon />
 							</ListItemIcon>
@@ -94,7 +92,7 @@ export default function AppDrawer() {
 					</ListItem>
 
 					<ListItem>
-						<ListItemButton onClick={() => navigate('/profile')}>
+						<ListItemButton onClick={() => navigate("/profile")}>
 							<ListItemIcon>
 								<ProfileIcon />
 							</ListItemIcon>
@@ -102,7 +100,7 @@ export default function AppDrawer() {
 						</ListItemButton>
 					</ListItem>
 					<ListItem>
-						<ListItemButton onClick={() => navigate('/login')}>
+						<ListItemButton>
 							<ListItemIcon>
 								<LogoutIcon color="error" />
 							</ListItemIcon>

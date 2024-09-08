@@ -6,7 +6,7 @@ async function main() {
         include: {
             posts: true,
         }
-    })
+    });
     console.log(data);
 }
 
