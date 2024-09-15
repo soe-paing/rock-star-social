@@ -11,9 +11,7 @@ router.get("/posts", async function (req, res) {
 		include: { user: true },
 	});
 
-	setTimeout(() => {
-        res.json(data);
-    }, 2000);
+	res.json(data);
 });
 
 router.get("/posts/:id", async function (req, res) {
@@ -35,7 +33,7 @@ router.post("/posts", async function (req, res) {
 
 	const post = await prisma.post.create({
 		data: { content, userId: 1 },
-		include: { user: true },
+        include: { user: true },
 	});
 
 	res.status(201).json(post);

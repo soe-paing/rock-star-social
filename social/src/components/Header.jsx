@@ -4,23 +4,24 @@ import { Box, AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 
 import {
 	Menu as MenuIcon,
-	ArrowBack as BackIcon,
 	Add as AddIcon,
 	LightMode as LightModeIcon,
 	DarkMode as DarkModeIcon,
+	ArrowBack as BackIcon,
 } from "@mui/icons-material";
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Header() {
 	const { setShowDrawer, showForm, setShowForm, mode, setMode } = useApp();
 
 	const { pathname } = useLocation();
-	const navigate = useNavigate();
- 
+    const navigate = useNavigate();
+
 	return (
 		<AppBar position="static">
 			<Toolbar>
-				{ pathname == "/" ? (
+				{pathname == "/" ? (
 					<IconButton
 						color="inherit"
 						edge="start"
@@ -35,7 +36,7 @@ export default function Header() {
 						<BackIcon />
 					</IconButton>
 				)}
-				
+
 				<Typography sx={{ flexGrow: 1, ml: 2 }}>Social</Typography>
 
 				<Box>

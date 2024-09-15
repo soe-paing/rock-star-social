@@ -18,6 +18,7 @@ import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Post from "./pages/Post.jsx";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <ThemedApp />,
-        errorElement: <ErrorPage />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "/",
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/post/:id",
-				element: <Post />
+				element: <Post />,
 			},
 			{
 				path: "/login",
