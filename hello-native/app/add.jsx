@@ -1,4 +1,4 @@
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Platform } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
 
@@ -25,11 +25,16 @@ const styles = StyleSheet.create({
 export default function Add() {
 	const [content, setContent] = useState("");
 
+	// Detect the platform and switch IP addresses based on it
+	const baseURL = Platform.OS === 'ios'
+	? 'http://192.168.100.35:8080/posts'  // IP for Mac (iOS)
+	: 'http://192.168.100.53:8080/posts'; // IP for Linux (Android)
+
     const queryClient = useQueryClient();
 
 	const addPost = useMutation(
 		async () => {
-			const res = await fetch("http://192.168.100.35:8080/posts", {
+			const res = await fetch(baseURL, {
 				method: "POST",
 				body: JSON.stringify({ content }),
 				headers: {
