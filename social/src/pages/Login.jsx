@@ -2,6 +2,7 @@ import { Box, Typography, OutlinedInput, Button, Alert, } from "@mui/material";
 import { useRef, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { useApp } from "../ThemedApp";
 
 async function postLogin(data) {
     const res = await fetch("http://localhost:8080/login", {
@@ -11,6 +12,8 @@ async function postLogin(data) {
             "Content-Type": "application/json",
         }
     })
+
+    return res.json();
 }
 
 export default function Login() {
@@ -21,24 +24,27 @@ export default function Login() {
 
     const [ error, setError ] = useState();
 
+    const { setAuth, setAuthUser } = useApp();
+
     const login = useMutation( postLogin, {
-        onSuccess: ({ token }) => {
+        onSuccess: ({ token, user }) => {
             localStorage.setItem("token", token);
+            setAuth(true);
+            setAuthUser(user);
             navigate("/");
         }
     })
 
-    { error && (
-        <Alert
-            severity="warning"
-            sx={{ mb: 4 }}>
-            {error}
-        </Alert>
-    )}
     return <Box>
         <Typography variant="h3" sx={{ mb: 4 }}>Login</Typography>
-
-        <Alert severity="warning" sx={{ mb: 4 }}>Username and Password required</Alert>
+        
+        { error && (
+            <Alert
+                severity="warning"
+                sx={{ mb: 4 }}>
+                {error}
+            </Alert>
+        )}
 
         <form
             onSubmit={ e => {
