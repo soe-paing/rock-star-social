@@ -14,6 +14,7 @@ import {
 
 import { green, teal } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
+import LikeButton from "./LikeButton";
 
 export default function Item({ item, remove, primary }) {
     const navigate = useNavigate();
@@ -64,16 +65,23 @@ export default function Item({ item, remove, primary }) {
                     sx={{
                         display: "flex",
                         flexDirection: "row",
-                        alignItems: "center",
-                        gap: 1,
+                        justifyContent: "space-between",
                     }}>
-                    <UserIcon
-                        fontSize="12"
-                        color="info"
-                    />
-                    <Typography variant="caption">
-                        {item.user.name}
-                    </Typography>
+                    <box 
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                        }}>
+                        <UserIcon
+                            fontSize="12"
+                            color="info"
+                        />
+                        <Typography variant="caption">
+                            {item.user.name}
+                        </Typography>
+                    </box>
+                    <LikeButton item={item} />
                 </Box>
             </CardContent>
 		</Card>
