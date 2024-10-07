@@ -17,6 +17,7 @@ model User {
     profile  String
     password String
     posts    Post[]
+    likes    Like[]
 }
 
 model Post {
@@ -25,4 +26,13 @@ model Post {
     user    User     @relation(fields: [userId], references: [id])
     userId  Int
     created DateTime @default(now())
+    likes   Like[]
+}
+
+model Like {
+    id     Int  @id @default(autoincrement())
+    post   Post @relation(fields: [postId], references: [id])
+    postId Int
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
 }
