@@ -13,6 +13,10 @@ async function postLogin(data) {
         }
     })
 
+    if (!res.ok) {
+        throw new Error(await res.json());
+    }
+
     return res.json();
 }
 
