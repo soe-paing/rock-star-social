@@ -96,7 +96,7 @@ export default function Item({ item, remove, primary }) {
                     </Box>
                 </CardContent>
             </Card>
-            { showCommentForm && <CommentForm/> }
+            { showCommentForm && <CommentForm postId={item.id}/> }
         </>
 	);
 }

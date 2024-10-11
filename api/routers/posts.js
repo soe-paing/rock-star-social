@@ -91,6 +91,10 @@ router.post('/comment/:id', auth, async function (req, res) {
 	const postId = req.params.id;
 	const userId = res.locals.user.id;
 
+	if (!content) {
+		return res.status(400).json({ msg: "content required" });
+	}
+
 	const result = await prisma.comment.create({
 		data: {
 			content: content,
