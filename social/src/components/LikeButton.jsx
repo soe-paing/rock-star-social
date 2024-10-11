@@ -4,8 +4,6 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { useApp } from "../ThemedApp";
 
-const token = localStorage.getItem("token");
-
 async function postLike(postId) {
     const token = localStorage.getItem("token");
 
@@ -65,21 +63,33 @@ export default function LikeButton({ item }) {
 
     return <ButtonGroup>
         {isLiked() ? (
-            <IconButton onClick={ e => {
+            <IconButton
+                size="small"
+                onClick={ e => {
                 unlike.mutate(item.id);
                 e.stopPropagation();
             }}>
-                <LikedIcon color="error" />
+                <LikedIcon
+                    fontSize="small"
+                    color="error"
+                />
             </IconButton>
         ) : (
-            <IconButton onClick={ e => {
+            <IconButton
+                size="small"
+                onClick={ e => {
                 like.mutate(item.id);
                 e.stopPropagation();
             }}>
-                <LikeIcon color="error"/>
+                <LikeIcon
+                    fontSize="small"
+                    color="error"
+                />
             </IconButton>
         )}
-        <Button variant="text">
+        <Button
+            size="small"
+            variant="text">
             {item.likes ? item.likes.length : 0}
         </Button>
     </ButtonGroup>
