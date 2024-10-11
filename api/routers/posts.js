@@ -10,7 +10,7 @@ router.get("/posts", async function (req, res) {
 	const data = await prisma.post.findMany({
 		orderBy: { id: "desc" },
 		take: 20,
-		include: { user: true, likes: true },
+		include: { user: true, likes: true, comments: true },
 	});
 
 	res.json(data);
@@ -20,7 +20,7 @@ router.get("/posts/:id", async function (req, res) {
 	const { id } = req.params;
 	const data = await prisma.post.findFirst({
 		where: { id: Number(id) },
-		include: { user: true, likes: true },
+		include: { user: true, likes: true, comments: true },
 	});
 
 	res.json(data);
@@ -84,6 +84,36 @@ router.delete("/unlike/:id", auth, async function (req, res) {
 	});
 
 	res.json(result);
+})
+
+router.post('/comment/:id', auth, async function (req, res) {
+	const { content } = req.body;
+	const postId = req.params.id;
+	const userId = res.locals.user.id;
+
+	const result = await prisma.comment.create({
+		data: {
+			content: content,
+			postId: Number(postId),
+			userId: userId,
+		}
+	})
+
+	res.json(result);
+})
+
+router.delete('/comment/:id', auth, async function (req, res) {
+	const { id } = req.params;
+
+	try {
+		await prisma.comment.delete({
+			where: { id: Number(id) },
+		});
+
+		res.sendStatus(204);
+	} catch (e) {
+		res.status(500).json(e);
+	}
 })
 
 module.exports = { postsRouter: router };

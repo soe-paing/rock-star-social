@@ -67,7 +67,7 @@ export default function Item({ item, remove, primary }) {
                         flexDirection: "row",
                         justifyContent: "space-between",
                     }}>
-                    <box 
+                    <Box 
                         sx={{
                             display: "flex",
                             flexDirection: "row",
@@ -76,11 +76,14 @@ export default function Item({ item, remove, primary }) {
                         <UserIcon
                             fontSize="12"
                             color="info"
+                            sx={{
+                                marginRight: "8px",
+                            }}
                         />
                         <Typography variant="caption">
                             {item.user.name}
                         </Typography>
-                    </box>
+                    </Box>
                     <LikeButton item={item} />
                 </Box>
             </CardContent>
