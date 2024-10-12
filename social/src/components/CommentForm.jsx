@@ -3,16 +3,12 @@ import { useRef } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 
-async function postComment(postId, comment) {
+async function postComment(content) {
 	const token = localStorage.getItem('token');
 
-	console.log(postId)
-	console.log(comment);
-	console.log(token);
-
-	const res = await fetch(`http://localhost:8080/comment/${postId}`, {
+	const res = await fetch(`http://localhost:8080/comment/${data.postId}`, {
 		method: "POST",
-		body: JSON.stringify({ comment }),
+		body: JSON.stringify(data),
 		headers: {
             Authorization: `Bearer ${token}`
 		}
@@ -26,20 +22,34 @@ export default function CommentForm({ postId }) {
 
     const queryClient = useQueryClient();
 
-	const addComment = useMutation(({postId, comment}) => postComment(postId, comment), {
-		onSuccess: async () => {
-            await queryClient.cancelQueries("posts");
-            queryClient.invalidateQueries("posts");
-        }
-	})
+	const addComment = useMutation(
+		async function postComment(content) {
+			const token = localStorage.getItem('token');
+		
+			const res = await fetch(`http://localhost:8080/comment/${postId}`, {
+				method: "POST",
+				body: JSON.stringify({ content }),
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			})
+		
+			return res.json();
+		}, {
+			onSuccess: async () => {
+				await queryClient.cancelQueries("posts");
+				queryClient.invalidateQueries("posts");
+			}
+		}
+	);
 
 	return (
 		<form
 			onSubmit={e => {
 				e.preventDefault();
-				const comment = commentRef.current.value;
+				const content = commentRef.current.value;
                 
-				addComment.mutate({postId, comment});
+				addComment.mutate({content});
 
 				e.currentTarget.reset();
 			}}>

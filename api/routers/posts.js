@@ -91,6 +91,8 @@ router.post('/comment/:id', auth, async function (req, res) {
 	const postId = req.params.id;
 	const userId = res.locals.user.id;
 
+	console.log(data,  postId,  userId);
+
 	if (!content) {
 		return res.status(400).json({ msg: "content required" });
 	}
